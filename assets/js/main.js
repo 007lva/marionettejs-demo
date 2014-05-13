@@ -8,7 +8,8 @@ ContactManager.Contact = Backbone.Model.extend({
 });
 
 ContactManager.ContactCollection = Backbone.Collection.extend({
-  model: ContactManager.Contact
+  model: ContactManager.Contact,
+  comparator: "firstName"
 });
 
 ContactManager.addRegions({
