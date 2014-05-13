@@ -7,34 +7,50 @@ ContactManager.Contact = Backbone.Model.extend({
   }
 });
 
+ContactManager.ContactCollection = Backbone.Collection.extend({
+  model: ContactManager.Contact
+});
+
 ContactManager.addRegions({
   mainRegion: "#main-region"
 });
 
-ContactManager.ContactView = Marionette.ItemView.extend({
-  template: "#contact-template",
-  events: {
-    "click p": "alertPhoneNumber"
-  },
-  alertPhoneNumber: function(){
-    alert(this.model.escape("phoneNumber"));
-  }
+ContactManager.ContactItemView = Marionette.ItemView.extend({
+  tagName: "li",
+  template: "#contact-list-item" 
+});
+
+ContactManager.ContactsView = Marionette.CollectionView.extend({
+  tagName: "ul",
+  itemView: ContactManager.ContactItemView
 });
 
 ContactManager.on("initialize:after", function(){
   console.log("ContactManager has started!");
 
-  var alice = new ContactManager.Contact({
-    //firstName: "Alice",
-    lastName: "Arten",
-    //phoneNumber: "555-0184"
+  var contacts = new ContactManager.ContactCollection([
+    {
+      firstName: "Bob",
+      lastName: "Brigham",
+      phoneNumber: "555-0163"
+    },
+    {
+      firstName: "Alice",
+      lastName: "Arten",
+      phoneNumber: "555-0184"
+    },
+    {
+      firstName: "Charlie",
+      lastName: "Campbell",
+      phoneNumber: "555-0129"
+    }
+  ]);
+
+  var concactsListView = new ContactManager.ContactsView({
+    collection: contacts
   });
 
-  var aliceView = new ContactManager.ContactView({
-    model: alice
-  });
-
-  ContactManager.mainRegion.show(aliceView);
+  ContactManager.mainRegion.show(concactsListView);
 });
 
 ContactManager.start();
