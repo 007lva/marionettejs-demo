@@ -11,6 +11,14 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
         collection: contacts
       });
 
+      contactsTableView.on("itemview:contact:delete", function(childView, model){
+        contacts.remove(model); 
+      });
+
+      contactsTableView.on("itemview:contact:show", function(childView, model){
+        ContactManager.ContactsApp.Show.Controller.showContact(model); 
+      });
+
       ContactManager.mainRegion.show(contactsTableView);
       ContactManager.secondRegion.show(contactsListView);
     }

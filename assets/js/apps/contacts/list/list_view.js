@@ -4,6 +4,8 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
     template: "ContactManager.ContactsApp.List.Templates.listRowView",
     events: {
       "click": "highlightName",
+      "click button.js-delete": "deleteClicked",
+      "click button.js-show": "showClicked",
       "click td": "alertCell"
     },
     highlightName: function(){
@@ -11,6 +13,22 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
     },
     alertCell: function(e){
       alert($(e.target).text());
+    },
+    deleteClicked: function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      this.trigger("contact:delete", this.model);
+    },
+    showClicked: function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      this.trigger("contact:show", this.model);
+    },
+    remove: function(){
+      var self = this;
+      this.$el.fadeOut(function(){
+        Marionette.ItemView.prototype.remove.call(self);
+      });
     }
   });
 
