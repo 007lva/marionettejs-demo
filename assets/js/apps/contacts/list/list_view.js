@@ -3,10 +3,14 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
     tagName: "tr",
     template: "ContactManager.ContactsApp.List.Templates.listRowView",
     events: {
-      "click": "highlightName"
+      "click": "highlightName",
+      "click td": "alertCell"
     },
     highlightName: function(){
       this.$el.toggleClass("warning");
+    },
+    alertCell: function(e){
+      alert($(e.target).text());
     }
   });
 
