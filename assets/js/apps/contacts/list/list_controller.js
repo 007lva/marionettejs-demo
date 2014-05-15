@@ -3,11 +3,16 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
     listContacts: function(){
       var contacts = ContactManager.request("contact:entities");
 
-      var contactsListView = new List.Contacts({
+      var contactsTableView = new List.ContactsTable({
         collection: contacts
       });
 
-      ContactManager.mainRegion.show(contactsListView);
+      var contactsListView = new List.ContactsList({
+        collection: contacts
+      });
+
+      ContactManager.mainRegion.show(contactsTableView);
+      ContactManager.secondRegion.show(contactsListView);
     }
-  }
+  };
 });

@@ -1,5 +1,6 @@
 ContactManager.module("ContactsApp.List.Templates", function(Templates, ContactManager, Backbone, Marionette, $, _){  
-  Templates.listItemView =  "<td><%= firstName %></td> <td><%= lastName %></td> <td><%= phoneNumber %></td>";
+  Templates.listRowView =  "<td><%= firstName %></td> <td><%= lastName %></td> <td><%= phoneNumber %></td>";
+  Templates.listItemView =  "<%= firstName %> <%= lastName %> <%= phoneNumber %>";
   Templates.tableItemsView = [
     "<thead>",
     "  <tr>",
@@ -10,5 +11,9 @@ ContactManager.module("ContactsApp.List.Templates", function(Templates, ContactM
     "</thead>",
     "<tbody>",
     "</tbody>"
+  ].join("\n");
+  Templates.listContainerView = [
+    "<p>Here is the list of all the contacts we have information for:</p>",
+    "<ul></ul>"
   ].join("\n");
 });
